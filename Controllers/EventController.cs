@@ -26,6 +26,7 @@ namespace events.Controllers
             int? getUserId = HttpContext.Session.GetInt32("CurrentUser");
             User SignedInUser = _context.Users.Where(User => User.id == getUserId).SingleOrDefault();
             List<Event> getAllEvents = _context.Events
+                .OrderBy(time => time.EventDate)
                 .Include(reserve => reserve.Attendings)
                     .ThenInclude(Reserve => Reserve.User)
                 .ToList();
@@ -73,9 +74,18 @@ namespace events.Controllers
                 return RedirectToAction("Login","User");
             }
             List<Event> showActivity = _context.Events.Where(activity => activity.id == id)
-            .Include(users => users.Attendings)
-                .ThenInclude(u => u.User)
-            .ToList();
+                .Include(users => users.Attendings)
+                    .ThenInclude(u => u.User)
+                .ToList();
+            int? getUserId = HttpContext.Session.GetInt32("CurrentUser");
+            User SignedInUser = _context.Users.Where(User => User.id == getUserId).SingleOrDefault();
+            List<Event> getAllEvents = _context.Events
+                .OrderBy(time => time.EventDate)
+                .Include(reserve => reserve.Attendings)
+                    .ThenInclude(Reserve => Reserve.User)
+                .ToList();
+            ViewBag.CurrentUser = SignedInUser;
+            ViewBag.AllEvents = getAllEvents;
             ViewBag.Activity = showActivity;
             return View("Activity");
         }
@@ -95,7 +105,7 @@ namespace events.Controllers
         [RouteAttribute("removeRSVP/{id}")]
         public IActionResult RemoveRSVP (int id){
             int? getUserId = HttpContext.Session.GetInt32("CurrentUser");
-            Reserve remove = _context.Reserves.Where(user => user.UserId == getUserId).Where(activity => activity.id == id).SingleOrDefault();
+            Reserve remove = _context.Reserves.Where(user => user.UserId == getUserId).Where(activity => activity.EventId == id).SingleOrDefault();
             _context.Remove(remove);
             _context.SaveChanges();
             return RedirectToAction("Dashboard");
@@ -103,7 +113,7 @@ namespace events.Controllers
         [HttpGet]
         [RouteAttribute("delete/{id}")]
         public IActionResult Delete(int id){
-            List<Reserve> deleteAll = _context.Reserves.Where(activity => activity.id == id).ToList();
+            List<Reserve> deleteAll = _context.Reserves.Where(activity => activity.EventId == id).ToList();
             foreach(var user in deleteAll){
                 _context.Remove(user);
                 _context.SaveChanges();

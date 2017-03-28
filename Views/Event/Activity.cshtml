@@ -2,30 +2,51 @@
 
 <div class="container">
     @{
-        foreach(var activity in @ViewBag.Activity){
-            <h1>@activity.Title</h1>
+        foreach(var e in @ViewBag.Activity){
+            <h1>@e.Title</h1>
             <h3>Event Coordinator:</h3>
-                @foreach(var c in @activity.Attendings){
-                    if(@c.User.id == @activity.CreatedBy){
+                @foreach(var c in @e.Attendings){
+                    if(@c.User.id == @e.CreatedBy){
                         <p>@c.User.FirstName</p>
                     }
                 }
-            
+            @foreach(var activity in @ViewBag.AllEvents){
+                @if(@activity.id == @e.id){
+                    <tr>
+                        @{bool created = false;}
+                        @{bool attending = false;}
+                        @if(@activity.CreatedBy == @ViewBag.CurrentUser.id){
+                            created = true;
+                        }
+                        @if(@created == true){
+                            <p><a href="/delete/@activity.id"><button>Delete</button></a></p>
+                        }
+                        else{
+                            @foreach(var res in activity.Attendings){
+                                if(@res.UserId == @ViewBag.CurrentUser.id){
+                                    attending = true;
+                                }
+                            }
+                            @if(@attending == true){
+                                <td><a href="/removeRSVP/@activity.id"><button>UnRSVP</button></a></td>
+                            }
+                            else{
+                                <td><a href="/reserve/@activity.id"><button>RSVP</button></a></td>
+                            }
+                        }
+                        
+                    </tr>
+                }
+                    
+            }
             <h3>Description</h3>
-            <p>@activity.Description</p>
+            <p>@e.Description</p>
             <h3>Participants:</h3>
-            @foreach(var user in activity.Attendings){
+            @foreach(var user in e.Attendings){
                 <ul>
                     <li>@user.User.FirstName</li>
                 </ul>
             }
         }
     }
-    
-
-    
-
-    
-    
-    
 </div>
