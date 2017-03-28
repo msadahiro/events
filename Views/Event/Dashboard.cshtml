@@ -16,12 +16,33 @@
             @{
                 foreach(var activity in @ViewBag.AllEvents){
                     <tr>
-                        <td>@activity.Title</td>
+                        <td><a href="activity/@activity.id">@activity.Title</a></td>
                         <td>@activity.EventDate</td>
                         <td>@activity.Duration @activity.Length</td>
                         <td>@activity.CreatedBy</td>
-                        <td>@activity.Reserves.Count</td>
-
+                        <td>@activity.Attendings.Count</td>
+                        @{bool created = false;}
+                        @{bool attending = false;}
+                        @if(@activity.CreatedBy == @ViewBag.CurrentUser.id){
+                            created = true;
+                        }
+                        @if(@created == true){
+                            <td><a href="delete/@activity.id"><button>Delete</button></a></td>
+                        }
+                        else{
+                            @foreach(var res in activity.Attendings){
+                                if(@res.UserId == @ViewBag.CurrentUser.id){
+                                    attending = true;
+                                }
+                            }
+                            @if(@attending == true){
+                                <td><td><a href="removeRSVP/@activity.id"><button>UnRSVP</button></a></td></td>
+                            }
+                            else{
+                                <td><a href="reserve/@activity.id"><button>RSVP</button></a></td>
+                            }
+                        }
+                        
                     </tr>
                 }
             }
