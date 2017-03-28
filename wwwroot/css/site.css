@@ -1,1 +1,5 @@
 /*Write all of your CSS here*/
+
+.error p {
+    color: red;
+}

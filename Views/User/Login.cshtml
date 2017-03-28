@@ -1,6 +1,11 @@
 @{
     ViewData["Title"] = "Login";
 }
+
+<div class="error">
+    <p>@ViewBag.LogError</p>
+</div>
+
 <form action="login" method="post">
   <div class="form-group">
     <label for="email">Email address:</label>

@@ -1,8 +1,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<form action="create" method="post">
-    <div class="errors">
+    <div class="error">
         @{
             foreach(var error in ViewBag.errors)
             {
@@ -16,6 +15,8 @@
             <p>@ViewBag.RegEmailError</p>
         }
     </div>
+<form action="create" method="post">
+
     <div class="form-group">
         <label for="email">First Name:</label>
         <input type="text" class="form-control" id="FirstName" name="FirstName">
