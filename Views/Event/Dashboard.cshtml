@@ -19,7 +19,11 @@
                         <td><a href="activity/@activity.id">@activity.Title</a></td>
                         <td>@activity.EventDate</td>
                         <td>@activity.Duration @activity.Length</td>
-                        <td>@activity.CreatedBy</td>
+                        @foreach(var c in activity.Attendings){
+                            @if(@c.User.id == @activity.CreatedBy){
+                                <td>@c.User.FirstName</td>
+                            }
+                        }
                         <td>@activity.Attendings.Count</td>
                         @{bool created = false;}
                         @{bool attending = false;}

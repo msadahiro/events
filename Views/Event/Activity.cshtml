@@ -1,12 +1,31 @@
 @{ ViewData["Title"] = "Activity"; }
 
 <div class="container">
-    <h1>@ViewBag.Activity.Title</h1>
-
-    <h3>@ViewBag.Activity</h3>
-
-    <h3>Description</h3>
-    <p>@ViewBag.Activity.Description</p>
+    @{
+        foreach(var activity in @ViewBag.Activity){
+            <h1>@activity.Title</h1>
+            <h3>Event Coordinator:</h3>
+                @foreach(var c in @activity.Attendings){
+                    if(@c.User.id == @activity.CreatedBy){
+                        <p>@c.User.FirstName</p>
+                    }
+                }
+            
+            <h3>Description</h3>
+            <p>@activity.Description</p>
+            <h3>Participants:</h3>
+            @foreach(var user in activity.Attendings){
+                <ul>
+                    <li>@user.User.FirstName</li>
+                </ul>
+            }
+        }
+    }
     
-    <h3>Participants:</h3>
+
+    
+
+    
+    
+    
 </div>

@@ -73,8 +73,9 @@ namespace events.Controllers
                 return RedirectToAction("Login","User");
             }
             List<Event> showActivity = _context.Events.Where(activity => activity.id == id)
-                .Include(attending => attending.Attendings)
-                .ToList();
+            .Include(users => users.Attendings)
+                .ThenInclude(u => u.User)
+            .ToList();
             ViewBag.Activity = showActivity;
             return View("Activity");
         }
@@ -89,6 +90,28 @@ namespace events.Controllers
             _context.Add(newRsvp);
             _context.SaveChanges();
             return RedirectToAction("Dashboard");
+        }
+        [HttpGet]
+        [RouteAttribute("removeRSVP/{id}")]
+        public IActionResult RemoveRSVP (int id){
+            int? getUserId = HttpContext.Session.GetInt32("CurrentUser");
+            Reserve remove = _context.Reserves.Where(user => user.UserId == getUserId).Where(activity => activity.id == id).SingleOrDefault();
+            _context.Remove(remove);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+        [HttpGet]
+        [RouteAttribute("delete/{id}")]
+        public IActionResult Delete(int id){
+            List<Reserve> deleteAll = _context.Reserves.Where(activity => activity.id == id).ToList();
+            foreach(var user in deleteAll){
+                _context.Remove(user);
+                _context.SaveChanges();
+            }
+            Event deleteEvent = _context.Events.Where(activity => activity.id == id).SingleOrDefault();
+            _context.Remove(deleteEvent);
+            _context.SaveChanges();
+            return RedirectToAction("dashboard");
         }
     }
 }
