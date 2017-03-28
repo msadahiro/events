@@ -6,8 +6,8 @@ namespace events.Models
     {
         // base() calls the parent class' constructor passing the "options" parameter along
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Reserve> Reserves { get; set; }
+        public DbSet<User> users { get; set; }
+        public DbSet<Event> events { get; set; }
+        public DbSet<Reserve> reserves { get; set; }
     }
 }

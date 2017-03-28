@@ -29,7 +29,7 @@ namespace events.Controllers
         [RouteAttribute("create")]
         public IActionResult Create(RegisterViewModel model, User newUser){
             if(ModelState.IsValid){
-                User RegCheckEmail = _context.Users.Where(User => User.Email == newUser.Email).SingleOrDefault();
+                User RegCheckEmail = _context.users.Where(User => User.Email == newUser.Email).SingleOrDefault();
                 if(RegCheckEmail == null){
                     _context.Add(newUser);
                     _context.SaveChanges();
@@ -57,7 +57,7 @@ namespace events.Controllers
         [RouteAttribute("login")]
         public IActionResult LoginUser(string Email, string Password, LoginViewModel model){
             if(ModelState.IsValid){
-                User SignInUser = _context.Users.Where(User => User.Email == Email).SingleOrDefault();
+                User SignInUser = _context.users.Where(User => User.Email == Email).SingleOrDefault();
                 if(SignInUser != null && Password != null){
                     if(SignInUser.Password == Password){
                         HttpContext.Session.SetInt32("CurrentUser",(int)SignInUser.id);
