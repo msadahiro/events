@@ -32,6 +32,10 @@ namespace events.Controllers
         public IActionResult New(){
             return View();
         }
-        
+        [HttpPost]
+        [RouteAttribute("makeactivity")]
+        public IActionResult MakeActivity(){
+            
+        }
     }
 }

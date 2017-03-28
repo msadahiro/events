@@ -1,17 +1,17 @@
 @{ ViewData["Title"] = "New Activity"; }
 
-<form action="makeActivity" method="post">
+<form action="makeactivity" method="post">
   <div class="form-group">
     <label for="Title">Title:</label>
     <input type="text" class="form-control" id="Title" name="Title">
   </div>
   <div class="form-group">
-    <label for="Date">Date:</label>
-    <input type="datetime-local" class="form-control" id="Date" name="Date">
+    <label for="EventDate">Date:</label>
+    <input type="datetime-local" class="form-control" id="EventDate" name="EventDate">
   </div>
 
   <div class="form-group">
-    <label for="Duration">Duration:</label>
+    <label class="control-label" for="Duration">Duration:</label>
     <input type="number" class="form-control" id="Date" name="Duration">
   </div>
 
