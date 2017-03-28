@@ -15,7 +15,8 @@
         <tbody>
             @{
                 foreach(var activity in @ViewBag.AllEvents){
-                    <tr>
+                    @if(@activity.EventDate >= @ViewBag.Today){
+                        <tr>
                         <td><a href="activity/@activity.id">@activity.Title</a></td>
                         <td>@activity.EventDate</td>
                         <td>@activity.Duration @activity.Length</td>
@@ -62,6 +63,8 @@
                         }
                         
                     </tr>
+                    }
+                    
                 }
             }
         </tbody>

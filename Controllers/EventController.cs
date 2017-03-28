@@ -23,6 +23,7 @@ namespace events.Controllers
             if(HttpContext.Session.GetInt32("CurrentUser")==null){
                 return RedirectToAction("Login","User");
             }
+            
             int? getUserId = HttpContext.Session.GetInt32("CurrentUser");
             User SignedInUser = _context.Users.Where(User => User.id == getUserId).SingleOrDefault();
             List<Event> getAllEvents = _context.Events
@@ -30,6 +31,7 @@ namespace events.Controllers
                 .Include(reserve => reserve.Attendings)
                     .ThenInclude(Reserve => Reserve.User)
                 .ToList();
+            ViewBag.Today = DateTime.Today;
             ViewBag.CurrentUser = SignedInUser;
             ViewBag.AllEvents = getAllEvents;
             return View();
