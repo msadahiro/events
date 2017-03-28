@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace events.Models
 {
@@ -13,6 +14,8 @@ namespace events.Models
         public DateTime CreatedAt {get;set;}
 
         public DateTime UpdatedAt {get;set;}
+
+        public List <Reserve> Reserves {get;set;}
         public User (){
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;

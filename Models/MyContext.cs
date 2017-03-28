@@ -8,5 +8,6 @@ namespace events.Models
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Reserve> Reserves { get; set; }
     }
 }

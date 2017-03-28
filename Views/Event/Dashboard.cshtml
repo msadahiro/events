@@ -13,8 +13,18 @@
                 <th>Actions</th>
             </tr>
         <tbody>
+            @{
+                foreach(var activity in @ViewBag.AllEvents){
+                    <tr>
+                        <td>@activity.Title</td>
+                        <td>@activity.EventDate</td>
+                        <td>@activity.Duration @activity.Length</td>
+                        <td>@activity.CreatedBy</td>
+                        <td>@activity.Reserves.Count</td>
 
-
+                    </tr>
+                }
+            }
         </tbody>
     </table>
     <a href="new"><button>Add New Activity</button></a>

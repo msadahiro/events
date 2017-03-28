@@ -1,5 +1,18 @@
 @{ ViewData["Title"] = "New Activity"; }
 
+<div class="errors">
+    @{
+        foreach(var error in ViewBag.errors)
+        {
+            //If there are any errors for a field...
+            if(@error.Errors.Count > 0)
+            {
+                // We show the first error for that field
+                <p>@error.Errors[0].ErrorMessage</p>
+            }
+        }
+    }
+    </div>
 <form action="makeactivity" method="post">
   <div class="form-group">
     <label for="Title">Title:</label>
@@ -7,20 +20,24 @@
   </div>
   <div class="form-group">
     <label for="EventDate">Date:</label>
-    <input type="datetime-local" class="form-control" id="EventDate" name="EventDate">
+    <input type="datetime-local" class="form-control" min="@ViewBag.Today" id="EventDate" name="EventDate">
   </div>
 
-  <div class="form-group">
+<div class="form-group">
+  <div class="col-xs-3">
     <label class="control-label" for="Duration">Duration:</label>
     <input type="number" class="form-control" id="Date" name="Duration">
-  </div>
-
-  <div class="form-group">
     <select name="Length" id="Length">
             <option value="Minutes">Minutes</option>
             <option value="Hours">Hours</option>
             <option value="Days">Days</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+   </div>
+
+  <div class="form-group">
+    <label class="control-label" for="Description">Description:</label>
+    <textarea name="Description" id="Description" cols="100" rows="10"></textarea>
+  </div>
+  <button type="submit" class="btn btn-default">Create Activity</button>
 </form>
