@@ -27,6 +27,20 @@
                         <td>@activity.Attendings.Count</td>
                         @{bool created = false;}
                         @{bool attending = false;}
+                        @{bool conflict = false;}
+                        @if(@activity.Length == "Hours"){
+                            DateTime StartDate = @activity.EventDate;
+                            DateTime EndDate = StartDate.AddHours(@activity.Duration);
+                            
+                        }
+                        @if(@activity.Length == "Minutes"){
+                            DateTime StartDate = @activity.EventDate;
+                            DateTime EndDate = StartDate.AddMinutes(@activity.Duration);
+                        }
+                        @if(@activity.Length == "Days"){
+                            DateTime StartDate = @activity.EventDate;
+                            DateTime EndDate = StartDate.AddDays(@activity.Duration);
+                        }
                         @if(@activity.CreatedBy == @ViewBag.CurrentUser.id){
                             created = true;
                         }
@@ -40,10 +54,10 @@
                                 }
                             }
                             @if(@attending == true){
-                                <td><a href="removeRSVP/@activity.id"><button>UnRSVP</button></a></td>
+                                <td><a href="removeRSVP/@activity.id"><button>Leave</button></a></td>
                             }
                             else{
-                                <td><a href="reserve/@activity.id"><button>RSVP</button></a></td>
+                                <td><a href="reserve/@activity.id"><button>Join</button></a></td>
                             }
                         }
                         

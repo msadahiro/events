@@ -60,7 +60,7 @@ namespace events.Controllers
                 };
                 _context.Add(newRsvp);
                 _context.SaveChanges();
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Activity",new {id = newEvent.id});
             }
             else{
                 ViewBag.errors = ModelState.Values;
