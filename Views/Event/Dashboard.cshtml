@@ -13,6 +13,9 @@
                 <th>Actions</th>
             </tr>
         <tbody>
+            <div class="error">
+                <p>@ViewBag.dashboard</p>
+            </div>      
             @{
                 foreach(var activity in @ViewBag.AllEvents){
                     @if(@activity.EventDate >= @ViewBag.Today){
