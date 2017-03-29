@@ -16,10 +16,16 @@ namespace events.Controllers
         {
             _context = context;
         }
-        // GET: /Home/
         [HttpGet]
         [Route("")]
         public IActionResult Index()
+        {
+            return View();
+        }
+        // GET: /Register/
+        [HttpGet]
+        [Route("register")]
+        public IActionResult Register()
         {
             ViewBag.errors = new List<string>();
             ViewBag.RegEmailError = "";
@@ -45,7 +51,7 @@ namespace events.Controllers
                 ViewBag.RegEmailError = "";
             }
             ViewBag.errors = ModelState.Values;
-            return View("Index");
+            return View("Register");
         }
         [HttpGet]
         [RouteAttribute("login")]

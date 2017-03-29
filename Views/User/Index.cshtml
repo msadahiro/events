@@ -1,41 +1,35 @@
-@{
-    ViewData["Title"] = "Home Page";
-}
-    <div class="error">
-        @{
-            foreach(var error in ViewBag.errors)
-            {
-                //If there are any errors for a field...
-                if(@error.Errors.Count > 0)
-                {
-                    // We show the first error for that field
-                    <p>@error.Errors[0].ErrorMessage</p>
-                }
-            }
-            <p>@ViewBag.RegEmailError</p>
-        }
+<div class="jumbotron">
+  <h1>Meet ups</h1> 
+  <p>Don't want to do activites alone? Join a group!</p>
+</div>
+<div class="container">
+  <div class="row">
+  <div class="col-md-4">
+    <div class="thumbnail">
+        <img src="~/images/disneyland.jpg" alt="Disney" style="width:100%">
+        <div class="caption">
+          <p>Disneyland</p>
+        </div>
+      </a>
     </div>
-<form action="create" method="post">
-
-    <div class="form-group">
-        <label for="email">First Name:</label>
-        <input type="text" class="form-control" id="FirstName" name="FirstName">
+  </div>
+  <div class="col-md-4">
+    <div class="thumbnail">
+        <img src="~/images/machuPicchu.jpg" alt="machuPicchu" style="width:100%">
+        <div class="caption">
+          <p>Machu Picchu</p>
+        </div>
+      </a>
     </div>
-    <div class="form-group">
-        <label for="email">Last Name:</label>
-        <input type="text" class="form-control" id="LastName" name="LastName">
   </div>
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="Email" name="Email">
+  <div class="col-md-4">
+    <div class="thumbnail">
+        <img src="~/images/snowboard.jpg" alt="snowboard" style="width:100%">
+        <div class="caption">
+          <p>Snowboard</p>
+        </div>
+      </a>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="Password" name="Password">
-  </div>
-  <div class="form-group">
-    <label for="pwd">Confirm Password:</label>
-    <input type="password" class="form-control" id="PasswordConfirmation" name="PasswordConfirmation">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</div>
+</div>
