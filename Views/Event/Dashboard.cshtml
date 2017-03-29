@@ -1,7 +1,12 @@
 @{ ViewData["Title"] = "Dashboard"; }
 <div class="container">
-    <h1>Welcome to the Dojo Activity Center</h1>
-    <p>Hello @ViewBag.CurrentUser.FirstName</p>
+    <div class="col-md-8">
+        <h1>Welcome to the Activity Center</h1>
+    </div>
+    <div class="col-md-4">
+        <p>Hello @ViewBag.CurrentUser.FirstName</p>
+    </div>
+    
      <div class="col-lg-12">
         <table class="table table-hover">
             <tr> 
@@ -22,7 +27,19 @@
                         <tr>
                         <td><a href="activity/@activity.id">@activity.Title</a></td>
                         <td>@activity.EventDate</td>
-                        <td>@activity.Duration @activity.Length</td>
+                        @if(@activity.Length == "Days"){
+                            int DaysConvert = @activity.Duration;
+                            int MinConvertToDays = DaysConvert/1440;
+                            <td>@MinConvertToDays @activity.Length</td>
+                        }
+                        @if(@activity.Length == "Hours"){
+                            int hoursConvert = @activity.Duration;
+                            int MinConvertToHours = hoursConvert/60;
+                            <td>@MinConvertToHours @activity.Length</td>
+                        }
+                        @if(@activity.Length == "Minutes"){
+                            <td>@activity.Duration @activity.Length</td>
+                        }
                         @foreach(var c in activity.Attendings){
                             @if(@c.User.id == @activity.CreatedBy){
                                 <td>@c.User.FirstName</td>
