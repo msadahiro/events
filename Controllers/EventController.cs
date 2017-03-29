@@ -28,14 +28,29 @@ namespace events.Controllers
             User SignedInUser = _context.users.Where(User => User.id == getUserId).SingleOrDefault();
             List<Event> getAllEvents = _context.events
                 .OrderBy(time => time.EventDate)
+                
                 .Include(reserve => reserve.Attendings)
                     .ThenInclude(Reserve => Reserve.User)
+                    
                 .ToList();
             ViewBag.Today = DateTime.Today;
             ViewBag.CurrentUser = SignedInUser;
             ViewBag.AllEvents = getAllEvents;
             return View();
         }
+        //If compare start date is after the event start date and the event bleeds into compare
+        //If event start date is after the compare start date and the compare bleeds into the event
+        public bool checkifvalid(Event compareEvent){
+            List<Event> getEvents = _context.events
+            .Where((eve) => ((eve.EventDate.ToBinary() < compareEvent.EventDate.ToBinary() && (eve.EventDate.ToBinary() + eve.Duration > compareEvent.EventDate.ToBinary())
+            ) || ((eve.EventDate.ToBinary() > compareEvent.EventDate.ToBinary() && (eve.EventDate.ToBinary() + eve.Duration < compareEvent.EventDate.ToBinary())))))
+            .ToList();
+            if(getEvents.Count > 1){
+                return false;
+            }
+            return true;
+        }
+
         [HttpGetAttribute]
         [RouteAttribute("new")]
         public IActionResult New(){
