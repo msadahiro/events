@@ -31,11 +31,10 @@ namespace events.Controllers
             User SignedInUser = _context.users.Where(User => User.id == getUserId).SingleOrDefault();
             List<Event> getAllEvents = _context.events
                 .OrderBy(time => time.EventDate)
-
                 .Include(reserve => reserve.Attendings)
                     .ThenInclude(Reserve => Reserve.User)
-
                 .ToList();
+            
             ViewBag.dashboard = HttpContext.Session.GetString("notValid");
             ViewBag.Today = DateTime.Today;
             ViewBag.CurrentUser = SignedInUser;

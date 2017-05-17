@@ -1,13 +1,13 @@
 @{ ViewData["Title"] = "Activity"; }
 
-<div class="container">
+<div class="container activityPage">
     @{
         foreach(var e in @ViewBag.Activity){
             <h1>@e.Title</h1>
-            <h3>Event Coordinator:</h3>
+            
                 @foreach(var c in @e.Attendings){
                     if(@c.User.id == @e.CreatedBy){
-                        <p>@c.User.FirstName</p>
+                        <h3>Event Coordinator: @c.User.FirstName</h3>
                     }
                 }
             @foreach(var activity in @ViewBag.AllEvents){
@@ -19,7 +19,7 @@
                             created = true;
                         }
                         @if(@created == true){
-                            <p><a href="/delete/@activity.id"><button>Delete</button></a></p>
+                            <p align="right">Do you want to remove this event? <a href="/delete/@activity.id"><button>Delete</button></a></p>
                         }
                         else{
                             @foreach(var res in activity.Attendings){
@@ -39,14 +39,19 @@
                 }
                     
             }
-            <h3>Description</h3>
-            <p>@e.Description</p>
-            <h3>Participants:</h3>
-            @foreach(var user in e.Attendings){
-                <ul>
-                    <li>@user.User.FirstName</li>
-                </ul>
-            }
+            <div class="activity-info">
+                <img src="@e.Image" alt="">
+                <h3>Location:</h3>
+                <p>@e.Location</p>
+                <h3>Description</h3>
+                <p>@e.Description</p>
+                <h3>Participants:</h3>
+                @foreach(var user in e.Attendings){
+                    <ul>
+                        <li>@user.User.FirstName</li>
+                    </ul>
+                }
+            </div>
         }
     }
 </div>

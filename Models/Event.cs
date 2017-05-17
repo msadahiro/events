@@ -7,6 +7,8 @@ namespace events.Models
     {
         public int id { get; set; }
         public string Title { get; set; }
+        public string Location { get; set; }
+        public string Image { get; set; }
         public DateTime EventDate {get;set;}
         public int Duration {get;set;}
         public string Length {get;set;}

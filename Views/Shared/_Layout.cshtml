@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
             asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.css"
             asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-    
+    <link href='https://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <div class="container body-content">
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
-                <a class="navbar-brand" href="/">Events</a>
+                <a class="navbar-brand" href="/"><p>Meet ups</p></a>
                 </div>
                 <ul class="nav navbar-nav">
-                <li><a href="/dashboard">Dashboard</a></li>
+                <!--<li><a href="/dashboard">Dashboard</a></li>-->
                 
                 <!--<li><a href="#">Page 2</a></li>-->
                 </ul>
@@ -31,6 +31,9 @@
             </div>
         </nav>
         @RenderBody()
+        <div class="footer text-center">
+            <p>This was a project designed by Michael Sadahiro. Idea based on Meetup.com</p>
+        </div>
     </div>
         
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"

@@ -1,5 +1,56 @@
 /*Write all of your CSS here*/
-
+.jumbotron{
+    background-color: white;
+}
+.navbar-brand>p{
+    font-family: 'Rock Salt', cursive;
+    color: red;
+    font-size: 24px;
+}
 .error p {
     color: red;
+}
+.section1{
+    background-image: url("../images/group1.jpg");
+    background-size: cover;
+    min-height: 800px;
+}
+.section2{
+    background-image: url("../images/group2.jpg");
+    background-size: cover;
+    min-height: 800px;
+}
+.section3{
+    background-image: url("../images/group3.jpg");
+    background-size: cover;
+    min-height: 800px;
+}
+.section1>h1,
+.section2>h1,
+.section3>h1{
+    color:white;
+    padding-top: 300px;
+    margin: 0 auto;
+}
+.footer{
+    min-height: 20px;
+    background-color: lightgray;
+    width:79%;
+    position:fixed;
+    bottom:0;
+    overflow: hidden;
+}
+.activity-info>img{
+    width: 80%;
+    margin: 0 auto;
+}
+.activity-info{
+   padding-bottom: 50px;
+}
+.activityPage>h1{
+    display: inline-block;
+}
+.activityPage>h3{
+    display: inline-block;
+    float: right;
 }
